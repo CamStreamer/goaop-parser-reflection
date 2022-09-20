@@ -111,6 +111,7 @@ class ReflectionClassConstant extends BaseReflectionClassConstant
     /**
      * @inheritDoc
      */
+    #[\ReturnTypeWillChange]
     public function getDeclaringClass()
     {
         return new ReflectionClass($this->className);
@@ -119,6 +120,7 @@ class ReflectionClassConstant extends BaseReflectionClassConstant
     /**
      * @inheritDoc
      */
+    #[\ReturnTypeWillChange]
     public function getDocComment()
     {
         $docBlock = $this->classConstantNode->getDocComment();
@@ -129,6 +131,7 @@ class ReflectionClassConstant extends BaseReflectionClassConstant
     /**
      * @inheritDoc
      */
+    #[\ReturnTypeWillChange]
     public function getModifiers()
     {
         $modifiers = 0;
@@ -148,7 +151,7 @@ class ReflectionClassConstant extends BaseReflectionClassConstant
     /**
      * @inheritDoc
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->constNode->name->toString();
     }
@@ -156,6 +159,7 @@ class ReflectionClassConstant extends BaseReflectionClassConstant
     /**
      * @inheritDoc
      */
+    #[\ReturnTypeWillChange]
     public function getValue()
     {
         $solver = new NodeExpressionResolver($this->getDeclaringClass());
@@ -166,7 +170,7 @@ class ReflectionClassConstant extends BaseReflectionClassConstant
     /**
      * @inheritDoc
      */
-    public function isPrivate()
+    public function isPrivate(): bool
     {
         return $this->classConstantNode->isPrivate();
     }
@@ -174,7 +178,7 @@ class ReflectionClassConstant extends BaseReflectionClassConstant
     /**
      * @inheritDoc
      */
-    public function isProtected()
+    public function isProtected(): bool
     {
         return $this->classConstantNode->isProtected();
     }
@@ -182,7 +186,7 @@ class ReflectionClassConstant extends BaseReflectionClassConstant
     /**
      * @inheritDoc
      */
-    public function isPublic()
+    public function isPublic(): bool
     {
         return $this->classConstantNode->isPublic();
     }

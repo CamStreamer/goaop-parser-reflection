@@ -166,7 +166,7 @@ class ReflectionParameter extends BaseReflectionParameter
     /**
      * {@inheritDoc}
      */
-    public function allowsNull()
+    public function allowsNull():  bool
     {
         // Enable 7.1 nullable types support
         if ($this->parameterNode->type instanceof NullableType) {
@@ -184,7 +184,7 @@ class ReflectionParameter extends BaseReflectionParameter
     /**
      * {@inheritDoc}
      */
-    public function canBePassedByValue()
+    public function canBePassedByValue(): bool
     {
         return !$this->isPassedByReference();
     }
@@ -192,6 +192,7 @@ class ReflectionParameter extends BaseReflectionParameter
     /**
      * @inheritDoc
      */
+    #[\ReturnTypeWillChange]
     public function getClass()
     {
         $parameterType = $this->parameterNode->type;
@@ -222,6 +223,7 @@ class ReflectionParameter extends BaseReflectionParameter
     /**
      * {@inheritDoc}
      */
+    #[\ReturnTypeWillChange]
     public function getDeclaringClass()
     {
         if ($this->declaringFunction instanceof \ReflectionMethod) {
@@ -234,7 +236,7 @@ class ReflectionParameter extends BaseReflectionParameter
     /**
      * {@inheritDoc}
      */
-    public function getDeclaringFunction()
+    public function getDeclaringFunction(): ReflectionFunctionAbstract
     {
         return $this->declaringFunction;
     }
@@ -242,6 +244,7 @@ class ReflectionParameter extends BaseReflectionParameter
     /**
      * {@inheritDoc}
      */
+    #[\ReturnTypeWillChange]
     public function getDefaultValue()
     {
         if (!$this->isDefaultValueAvailable()) {
@@ -254,6 +257,7 @@ class ReflectionParameter extends BaseReflectionParameter
     /**
      * {@inheritDoc}
      */
+    #[\ReturnTypeWillChange]
     public function getDefaultValueConstantName()
     {
         if (!$this->isDefaultValueAvailable()) {
@@ -266,7 +270,7 @@ class ReflectionParameter extends BaseReflectionParameter
     /**
      * @inheritDoc
      */
-    public function getName()
+    public function getName(): string
     {
         return (string)$this->parameterNode->var->name;
     }
@@ -274,7 +278,7 @@ class ReflectionParameter extends BaseReflectionParameter
     /**
      * {@inheritDoc}
      */
-    public function getPosition()
+    public function getPosition(): int
     {
         return $this->parameterIndex;
     }
@@ -282,6 +286,7 @@ class ReflectionParameter extends BaseReflectionParameter
     /**
      * @inheritDoc
      */
+    #[\ReturnTypeWillChange]
     public function getType()
     {
         $isBuiltin     = false;
@@ -308,7 +313,7 @@ class ReflectionParameter extends BaseReflectionParameter
     /**
      * @inheritDoc
      */
-    public function hasType()
+    public function hasType(): bool
     {
         $hasType = isset($this->parameterNode->type);
 
@@ -318,7 +323,7 @@ class ReflectionParameter extends BaseReflectionParameter
     /**
      * @inheritDoc
      */
-    public function isArray()
+    public function isArray(): bool
     {
         $type = $this->parameterNode->type;
 
@@ -328,7 +333,7 @@ class ReflectionParameter extends BaseReflectionParameter
     /**
      * @inheritDoc
      */
-    public function isCallable()
+    public function isCallable(): bool
     {
         $type = $this->parameterNode->type;
 
@@ -338,7 +343,7 @@ class ReflectionParameter extends BaseReflectionParameter
     /**
      * @inheritDoc
      */
-    public function isDefaultValueAvailable()
+    public function isDefaultValueAvailable(): bool
     {
         return isset($this->parameterNode->default);
     }
@@ -346,7 +351,7 @@ class ReflectionParameter extends BaseReflectionParameter
     /**
      * {@inheritDoc}
      */
-    public function isDefaultValueConstant()
+    public function isDefaultValueConstant(): bool
     {
         return $this->isDefaultValueConstant;
     }
@@ -354,7 +359,7 @@ class ReflectionParameter extends BaseReflectionParameter
     /**
      * {@inheritDoc}
      */
-    public function isOptional()
+    public function isOptional(): bool
     {
         return $this->isVariadic() || ($this->isDefaultValueAvailable() && $this->haveSiblingsDefaultValues());
     }
@@ -362,7 +367,7 @@ class ReflectionParameter extends BaseReflectionParameter
     /**
      * @inheritDoc
      */
-    public function isPassedByReference()
+    public function isPassedByReference(): bool
     {
         return (bool) $this->parameterNode->byRef;
     }
@@ -370,7 +375,7 @@ class ReflectionParameter extends BaseReflectionParameter
     /**
      * @inheritDoc
      */
-    public function isVariadic()
+    public function isVariadic(): bool
     {
         return (bool) $this->parameterNode->variadic;
     }
